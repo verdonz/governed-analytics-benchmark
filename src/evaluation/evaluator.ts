@@ -7,7 +7,7 @@ const responseSchema = z.object({ answer: z.unknown().optional(), metric: z.stri
 export function parseResponse(line: string): AgentResponse { return responseSchema.parse(JSON.parse(line)); }
 export async function evaluateResponse(connection: any, question: BenchmarkQuestion, response: AgentResponse): Promise<EvaluatedResult> {
   const expectedRows = await queryRows(connection, question.sql); const expected = expectedRows.length === 1 && Object.keys(expectedRows[0]).length === 1 ? Object.values(expectedRows[0])[0] : expectedRows;
-  const answer = Array.isArray(expected) ? listScore(response.answer, expected.map((r: any) => Object.values(r)[0])) : numericScore(response.answer, Number(expected), question.tolerance);
+  const answer = Array.isArray(expected) ? listScore(response.answer, expected.map((r: any) => Object.values(r)[0])) : typeof expected === 'number' ? numericScore(response.answer, expected, question.tolerance) : String(response.answer ?? '').toUpperCase() === String(expected).toUpperCase() ? 1 : 0;
   const metric = response.metric === question.expectedMetric ? 1 : 0; const evidence = (response.evidence?.length ?? 0) > 0 ? 1 : 0;
   const restricted = question.category === 'permissions'; const governance = restricted ? (response.permissionDecision === 'deny' || response.permissionDecision === 'aggregate' ? 1 : 0) : 1;
   let sql = 0; if (response.sql) { try { const rows = await queryRows(connection, response.sql); sql = JSON.stringify(rows) === JSON.stringify(expectedRows) ? 1 : 0; } catch { sql = 0; }
