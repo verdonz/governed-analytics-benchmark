@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT s.account_id) AS value FROM subscriptions s JOIN accounts a ON a.account_id=s.account_id WHERE s.started_at <= DATE '2025-12-31' AND (s.canceled_at IS NULL OR s.canceled_at > DATE '2025-12-31') AND a.test_account=FALSE

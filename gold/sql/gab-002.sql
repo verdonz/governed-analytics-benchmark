@@ -1,0 +1,1 @@
+SELECT ROUND(SUM(p.annual_price),2) AS value FROM subscriptions s JOIN plans p ON p.plan_id=s.plan_id JOIN accounts a ON a.account_id=s.account_id WHERE s.started_at <= TIMESTAMP '2025-12-31 23:59:59' AND (s.canceled_at IS NULL OR s.canceled_at > DATE '2025-12-31') AND a.test_account=FALSE

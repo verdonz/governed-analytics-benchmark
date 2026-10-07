@@ -1,0 +1,1 @@
+SELECT r.name, ROUND(SUM(oi.quantity*oi.unit_price)/COUNT(DISTINCT o.order_id),2) AS value FROM orders o JOIN order_items oi ON oi.order_id=o.order_id JOIN accounts a ON a.account_id=o.account_id JOIN regions r ON r.region_id=a.billing_region_id WHERE o.status='completed' GROUP BY r.name ORDER BY r.name

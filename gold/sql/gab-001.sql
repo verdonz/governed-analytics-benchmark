@@ -1,0 +1,1 @@
+SELECT ROUND(SUM(il.amount) - COALESCE((SELECT SUM(r.amount) FROM refunds r JOIN invoices ri ON ri.invoice_id=r.invoice_id WHERE ri.status='posted'),0),2) AS value FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id WHERE i.status='posted' AND i.recognized_at BETWEEN DATE '2025-09-01' AND DATE '2025-09-30'

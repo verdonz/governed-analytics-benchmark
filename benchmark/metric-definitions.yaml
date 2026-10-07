@@ -1,0 +1,27 @@
+version: 26.10.0
+metrics:
+  net_revenue:
+    name: Net revenue
+    description: Recognized invoice-line revenue less refunds; excludes test and internal accounts.
+    formula: recognized invoice line amount minus refunds
+    grain: invoice_line
+    time_dimension: invoices.recognized_at
+    dimensions: [account, region, product, sales_rep]
+    exclusions: [test accounts, internal accounts]
+    owner: Finance
+    freshness: daily
+    synonyms: [revenue, recognized revenue, net sales]
+  gross_revenue: {name: Gross revenue, description: Posted invoice-line amount before refunds, formula: sum invoice_lines.amount, grain: invoice_line, time_dimension: invoices.recognized_at, owner: Finance, synonyms: [billings]}
+  arr: {name: ARR, description: Annualized recurring subscription value active at a point in time, formula: sum active plan annual_price, grain: account, time_dimension: subscriptions.started_at, exclusions: [one-time purchases, canceled subscriptions, test accounts], owner: Finance, synonyms: [annual recurring revenue]}
+  mrr: {name: MRR, description: ARR divided by twelve, formula: arr / 12, grain: account, time_dimension: subscriptions.started_at, owner: Finance}
+  active_customers: {name: Active customers, description: Distinct non-test accounts with an active subscription on the date, formula: count distinct active subscription account_id, grain: account, time_dimension: subscriptions.started_at, owner: Customer Success}
+  new_arr: {name: New ARR, description: Annualized value of subscriptions starting in the period, formula: sum annual_price for started subscriptions, grain: subscription, time_dimension: subscriptions.started_at, owner: Finance}
+  expansion_arr: {name: Expansion ARR, description: Incremental annualized subscription value from existing accounts, formula: new subscription ARR for accounts with prior subscription, grain: account, time_dimension: subscriptions.started_at, owner: Finance}
+  contraction_arr: {name: Contraction ARR, description: ARR lost from a plan downgrade, formula: prior ARR minus current ARR, grain: account, time_dimension: subscriptions.started_at, owner: Finance}
+  logo_churn: {name: Logo churn, description: Distinct accounts canceled and not reactivated in the period, formula: count distinct canceled accounts excluding later reactivation, grain: account, time_dimension: subscriptions.canceled_at, owner: Customer Success}
+  revenue_churn: {name: Revenue churn, description: Lost recurring revenue from churned accounts divided by opening ARR, formula: churned ARR / opening ARR, grain: account, time_dimension: subscriptions.canceled_at, owner: Finance}
+  conversion_rate: {name: Conversion rate, description: Converted eligible web sessions divided by eligible sessions, formula: converted sessions / non-bot non-internal sessions, grain: web_session, time_dimension: web_sessions.occurred_at, exclusions: [bots, internal traffic], owner: Marketing}
+  trial_conversion_rate: {name: Trial conversion rate, description: Trial accounts with conversion divided by trial accounts, formula: converted trial accounts / trial accounts, grain: account, time_dimension: funnel_events.occurred_at, exclusions: [bots], owner: Marketing}
+  average_order_value: {name: Average order value, description: Completed order merchandise value divided by distinct completed orders, formula: sum quantity times unit_price / count distinct order_id, grain: order, time_dimension: orders.ordered_at, owner: Sales}
+  refund_rate: {name: Refund rate, description: Refund amount divided by posted invoice-line amount, formula: refunds / gross revenue, grain: invoice, time_dimension: refunds.refund_date, owner: Finance}
+  retention_rate: {name: Retention rate, description: Active accounts divided by accounts in the cohort, formula: active accounts / cohort accounts, grain: account, time_dimension: subscriptions.started_at, owner: Customer Success}

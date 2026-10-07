@@ -1,0 +1,1036 @@
+{
+  "benchmark_version": "26.10.0",
+  "dataset_version": "26.10.0",
+  "answers": {
+    "GAB-001": [
+      {
+        "value": 754633.33
+      }
+    ],
+    "GAB-002": [
+      {
+        "value": 17432360
+      }
+    ],
+    "GAB-003": [
+      {
+        "value": "1959"
+      }
+    ],
+    "GAB-004": [
+      {
+        "value": 14.31
+      }
+    ],
+    "GAB-005": [
+      {
+        "value": 4023.72
+      }
+    ],
+    "GAB-006": [
+      {
+        "value": 754633.33
+      }
+    ],
+    "GAB-007": [
+      {
+        "value": 1090303.33
+      }
+    ],
+    "GAB-008": [
+      {
+        "value": 452621.67
+      }
+    ],
+    "GAB-009": [
+      {
+        "value": "60"
+      }
+    ],
+    "GAB-010": [
+      {
+        "value": 4890540
+      }
+    ],
+    "GAB-011": [
+      {
+        "name": "Support",
+        "value": 9083865
+      }
+    ],
+    "GAB-012": [
+      {
+        "name": "APAC",
+        "value": 2687.91
+      },
+      {
+        "name": "Europe",
+        "value": 2687.62
+      },
+      {
+        "name": "Latin America",
+        "value": 2688.1
+      },
+      {
+        "name": "North America",
+        "value": 2687.63
+      },
+      {
+        "name": "Protected South",
+        "value": 2686.51
+      }
+    ],
+    "GAB-013": [
+      {
+        "value": "0"
+      }
+    ],
+    "GAB-014": [
+      {
+        "name": "Starter",
+        "value": 0.6122
+      }
+    ],
+    "GAB-015": [
+      {
+        "name": "Rep 01",
+        "value": 93590
+      },
+      {
+        "name": "Rep 02",
+        "value": 174456.67
+      },
+      {
+        "name": "Rep 03",
+        "value": 1336993.33
+      },
+      {
+        "name": "Rep 04",
+        "value": 1591030
+      },
+      {
+        "name": "Rep 05",
+        "value": 93753.33
+      },
+      {
+        "name": "Rep 06",
+        "value": 157873.33
+      },
+      {
+        "name": "Rep 07",
+        "value": 1336993.33
+      },
+      {
+        "name": "Rep 08",
+        "value": 1391110
+      },
+      {
+        "name": "Rep 09",
+        "value": 93753.33
+      },
+      {
+        "name": "Rep 10",
+        "value": 159200
+      },
+      {
+        "name": "Rep 11",
+        "value": 1336993.33
+      },
+      {
+        "name": "Rep 12",
+        "value": 1399440
+      },
+      {
+        "name": "Rep 13",
+        "value": 93753.33
+      },
+      {
+        "name": "Rep 14",
+        "value": 174456.67
+      },
+      {
+        "name": "Rep 15",
+        "value": 1339656.67
+      },
+      {
+        "name": "Rep 16",
+        "value": 1599360
+      },
+      {
+        "name": "Rep 17",
+        "value": 93590
+      },
+      {
+        "name": "Rep 18",
+        "value": 174456.67
+      },
+      {
+        "name": "Rep 19",
+        "value": 1336993.33
+      },
+      {
+        "name": "Rep 20",
+        "value": 1591030
+      }
+    ],
+    "GAB-016": [],
+    "GAB-017": [
+      {
+        "value": 114.29
+      }
+    ],
+    "GAB-018": [
+      {
+        "value": "60"
+      }
+    ],
+    "GAB-019": [
+      {
+        "account_id": 7
+      },
+      {
+        "account_id": 19
+      },
+      {
+        "account_id": 31
+      },
+      {
+        "account_id": 43
+      },
+      {
+        "account_id": 55
+      },
+      {
+        "account_id": 67
+      },
+      {
+        "account_id": 79
+      },
+      {
+        "account_id": 91
+      },
+      {
+        "account_id": 103
+      },
+      {
+        "account_id": 115
+      },
+      {
+        "account_id": 127
+      },
+      {
+        "account_id": 139
+      },
+      {
+        "account_id": 151
+      },
+      {
+        "account_id": 163
+      },
+      {
+        "account_id": 175
+      },
+      {
+        "account_id": 187
+      },
+      {
+        "account_id": 199
+      },
+      {
+        "account_id": 211
+      },
+      {
+        "account_id": 223
+      },
+      {
+        "account_id": 235
+      },
+      {
+        "account_id": 247
+      },
+      {
+        "account_id": 259
+      },
+      {
+        "account_id": 271
+      },
+      {
+        "account_id": 283
+      },
+      {
+        "account_id": 295
+      },
+      {
+        "account_id": 307
+      },
+      {
+        "account_id": 319
+      },
+      {
+        "account_id": 331
+      },
+      {
+        "account_id": 343
+      },
+      {
+        "account_id": 355
+      },
+      {
+        "account_id": 367
+      },
+      {
+        "account_id": 379
+      },
+      {
+        "account_id": 391
+      },
+      {
+        "account_id": 403
+      },
+      {
+        "account_id": 415
+      },
+      {
+        "account_id": 427
+      },
+      {
+        "account_id": 439
+      },
+      {
+        "account_id": 451
+      },
+      {
+        "account_id": 463
+      },
+      {
+        "account_id": 475
+      },
+      {
+        "account_id": 487
+      },
+      {
+        "account_id": 499
+      },
+      {
+        "account_id": 511
+      },
+      {
+        "account_id": 523
+      },
+      {
+        "account_id": 535
+      },
+      {
+        "account_id": 547
+      },
+      {
+        "account_id": 559
+      },
+      {
+        "account_id": 571
+      },
+      {
+        "account_id": 595
+      },
+      {
+        "account_id": 607
+      },
+      {
+        "account_id": 619
+      },
+      {
+        "account_id": 631
+      },
+      {
+        "account_id": 643
+      },
+      {
+        "account_id": 655
+      },
+      {
+        "account_id": 667
+      },
+      {
+        "account_id": 679
+      },
+      {
+        "account_id": 691
+      },
+      {
+        "account_id": 703
+      },
+      {
+        "account_id": 715
+      },
+      {
+        "account_id": 727
+      },
+      {
+        "account_id": 739
+      },
+      {
+        "account_id": 751
+      },
+      {
+        "account_id": 763
+      },
+      {
+        "account_id": 775
+      },
+      {
+        "account_id": 787
+      },
+      {
+        "account_id": 799
+      },
+      {
+        "account_id": 811
+      },
+      {
+        "account_id": 823
+      },
+      {
+        "account_id": 835
+      },
+      {
+        "account_id": 847
+      },
+      {
+        "account_id": 859
+      },
+      {
+        "account_id": 871
+      },
+      {
+        "account_id": 883
+      },
+      {
+        "account_id": 895
+      },
+      {
+        "account_id": 907
+      },
+      {
+        "account_id": 919
+      },
+      {
+        "account_id": 931
+      },
+      {
+        "account_id": 943
+      },
+      {
+        "account_id": 955
+      },
+      {
+        "account_id": 967
+      },
+      {
+        "account_id": 979
+      },
+      {
+        "account_id": 991
+      },
+      {
+        "account_id": 1003
+      },
+      {
+        "account_id": 1015
+      },
+      {
+        "account_id": 1027
+      },
+      {
+        "account_id": 1039
+      },
+      {
+        "account_id": 1051
+      },
+      {
+        "account_id": 1063
+      },
+      {
+        "account_id": 1075
+      },
+      {
+        "account_id": 1087
+      },
+      {
+        "account_id": 1099
+      },
+      {
+        "account_id": 1111
+      },
+      {
+        "account_id": 1123
+      },
+      {
+        "account_id": 1135
+      },
+      {
+        "account_id": 1147
+      },
+      {
+        "account_id": 1159
+      },
+      {
+        "account_id": 1171
+      },
+      {
+        "account_id": 1183
+      },
+      {
+        "account_id": 1195
+      },
+      {
+        "account_id": 1207
+      },
+      {
+        "account_id": 1219
+      },
+      {
+        "account_id": 1231
+      },
+      {
+        "account_id": 1243
+      },
+      {
+        "account_id": 1255
+      },
+      {
+        "account_id": 1267
+      },
+      {
+        "account_id": 1279
+      },
+      {
+        "account_id": 1291
+      },
+      {
+        "account_id": 1303
+      },
+      {
+        "account_id": 1315
+      },
+      {
+        "account_id": 1327
+      },
+      {
+        "account_id": 1339
+      },
+      {
+        "account_id": 1351
+      },
+      {
+        "account_id": 1363
+      },
+      {
+        "account_id": 1375
+      },
+      {
+        "account_id": 1387
+      },
+      {
+        "account_id": 1399
+      },
+      {
+        "account_id": 1411
+      },
+      {
+        "account_id": 1423
+      },
+      {
+        "account_id": 1435
+      },
+      {
+        "account_id": 1447
+      },
+      {
+        "account_id": 1459
+      },
+      {
+        "account_id": 1471
+      },
+      {
+        "account_id": 1483
+      },
+      {
+        "account_id": 1495
+      },
+      {
+        "account_id": 1507
+      },
+      {
+        "account_id": 1519
+      },
+      {
+        "account_id": 1531
+      },
+      {
+        "account_id": 1543
+      },
+      {
+        "account_id": 1555
+      },
+      {
+        "account_id": 1567
+      },
+      {
+        "account_id": 1579
+      },
+      {
+        "account_id": 1591
+      },
+      {
+        "account_id": 1603
+      },
+      {
+        "account_id": 1615
+      },
+      {
+        "account_id": 1627
+      },
+      {
+        "account_id": 1639
+      },
+      {
+        "account_id": 1651
+      },
+      {
+        "account_id": 1663
+      },
+      {
+        "account_id": 1675
+      },
+      {
+        "account_id": 1687
+      },
+      {
+        "account_id": 1699
+      },
+      {
+        "account_id": 1711
+      },
+      {
+        "account_id": 1723
+      },
+      {
+        "account_id": 1735
+      },
+      {
+        "account_id": 1759
+      },
+      {
+        "account_id": 1771
+      },
+      {
+        "account_id": 1783
+      },
+      {
+        "account_id": 1795
+      },
+      {
+        "account_id": 1807
+      },
+      {
+        "account_id": 1819
+      },
+      {
+        "account_id": 1831
+      },
+      {
+        "account_id": 1843
+      },
+      {
+        "account_id": 1855
+      },
+      {
+        "account_id": 1867
+      },
+      {
+        "account_id": 1879
+      },
+      {
+        "account_id": 1891
+      },
+      {
+        "account_id": 1903
+      },
+      {
+        "account_id": 1915
+      },
+      {
+        "account_id": 1927
+      },
+      {
+        "account_id": 1939
+      },
+      {
+        "account_id": 1951
+      },
+      {
+        "account_id": 1963
+      },
+      {
+        "account_id": 1975
+      },
+      {
+        "account_id": 1987
+      },
+      {
+        "account_id": 1999
+      },
+      {
+        "account_id": 2011
+      },
+      {
+        "account_id": 2023
+      },
+      {
+        "account_id": 2035
+      },
+      {
+        "account_id": 2047
+      },
+      {
+        "account_id": 2059
+      },
+      {
+        "account_id": 2071
+      },
+      {
+        "account_id": 2083
+      },
+      {
+        "account_id": 2095
+      },
+      {
+        "account_id": 2107
+      },
+      {
+        "account_id": 2119
+      },
+      {
+        "account_id": 2131
+      },
+      {
+        "account_id": 2143
+      },
+      {
+        "account_id": 2155
+      },
+      {
+        "account_id": 2167
+      },
+      {
+        "account_id": 2179
+      },
+      {
+        "account_id": 2191
+      },
+      {
+        "account_id": 2203
+      },
+      {
+        "account_id": 2215
+      },
+      {
+        "account_id": 2227
+      },
+      {
+        "account_id": 2239
+      },
+      {
+        "account_id": 2251
+      },
+      {
+        "account_id": 2263
+      },
+      {
+        "account_id": 2275
+      },
+      {
+        "account_id": 2287
+      },
+      {
+        "account_id": 2299
+      },
+      {
+        "account_id": 2311
+      },
+      {
+        "account_id": 2323
+      },
+      {
+        "account_id": 2335
+      },
+      {
+        "account_id": 2347
+      },
+      {
+        "account_id": 2359
+      },
+      {
+        "account_id": 2371
+      },
+      {
+        "account_id": 2383
+      },
+      {
+        "account_id": 2395
+      },
+      {
+        "account_id": 2407
+      },
+      {
+        "account_id": 2419
+      },
+      {
+        "account_id": 2431
+      },
+      {
+        "account_id": 2443
+      },
+      {
+        "account_id": 2455
+      },
+      {
+        "account_id": 2467
+      },
+      {
+        "account_id": 2479
+      },
+      {
+        "account_id": 2491
+      },
+      {
+        "account_id": 2503
+      },
+      {
+        "account_id": 2515
+      },
+      {
+        "account_id": 2527
+      },
+      {
+        "account_id": 2539
+      },
+      {
+        "account_id": 2551
+      },
+      {
+        "account_id": 2563
+      },
+      {
+        "account_id": 2575
+      },
+      {
+        "account_id": 2587
+      },
+      {
+        "account_id": 2599
+      },
+      {
+        "account_id": 2611
+      },
+      {
+        "account_id": 2623
+      },
+      {
+        "account_id": 2635
+      },
+      {
+        "account_id": 2647
+      },
+      {
+        "account_id": 2659
+      },
+      {
+        "account_id": 2671
+      },
+      {
+        "account_id": 2683
+      },
+      {
+        "account_id": 2695
+      },
+      {
+        "account_id": 2707
+      },
+      {
+        "account_id": 2719
+      },
+      {
+        "account_id": 2731
+      },
+      {
+        "account_id": 2743
+      },
+      {
+        "account_id": 2755
+      },
+      {
+        "account_id": 2767
+      },
+      {
+        "account_id": 2779
+      },
+      {
+        "account_id": 2791
+      },
+      {
+        "account_id": 2803
+      },
+      {
+        "account_id": 2815
+      },
+      {
+        "account_id": 2827
+      },
+      {
+        "account_id": 2839
+      },
+      {
+        "account_id": 2851
+      },
+      {
+        "account_id": 2863
+      },
+      {
+        "account_id": 2875
+      },
+      {
+        "account_id": 2887
+      },
+      {
+        "account_id": 2899
+      },
+      {
+        "account_id": 2923
+      },
+      {
+        "account_id": 2935
+      },
+      {
+        "account_id": 2947
+      },
+      {
+        "account_id": 2959
+      },
+      {
+        "account_id": 2971
+      },
+      {
+        "account_id": 2983
+      },
+      {
+        "account_id": 2995
+      }
+    ],
+    "GAB-020": [
+      {
+        "name": "Europe",
+        "value": 89
+      }
+    ],
+    "GAB-021": [
+      {
+        "decision": "DENIED"
+      }
+    ],
+    "GAB-022": [
+      {
+        "decision": "DENIED"
+      }
+    ],
+    "GAB-023": [
+      {
+        "decision": "AGGREGATE_ONLY"
+      }
+    ],
+    "GAB-024": [
+      {
+        "decision": "DENIED"
+      }
+    ],
+    "GAB-025": [
+      {
+        "segment": "mid-market",
+        "value": "900"
+      },
+      {
+        "segment": "smb",
+        "value": "1800"
+      }
+    ],
+    "GAB-026": [
+      {
+        "source": "referral",
+        "conversions": "323",
+        "trials": "484"
+      },
+      {
+        "source": "paid",
+        "conversions": "483",
+        "trials": "323"
+      },
+      {
+        "source": "organic",
+        "conversions": "484",
+        "trials": "322"
+      }
+    ],
+    "GAB-027": [
+      {
+        "month": "2025-10-01 00:00:00",
+        "revenue": 228088.33
+      },
+      {
+        "month": "2025-11-01 00:00:00",
+        "revenue": 210758.33
+      },
+      {
+        "month": "2025-12-01 00:00:00",
+        "revenue": 220416.67
+      }
+    ],
+    "GAB-028": [
+      {
+        "month": "2025-10-01 00:00:00",
+        "new_arr": 1663680
+      },
+      {
+        "month": "2025-11-01 00:00:00",
+        "new_arr": 1253500
+      },
+      {
+        "month": "2025-12-01 00:00:00",
+        "new_arr": 1406000
+      }
+    ],
+    "GAB-029": [
+      {
+        "name": "Support",
+        "refund_amount": 218400
+      }
+    ],
+    "GAB-030": [
+      {
+        "quarter": "1",
+        "churned_accounts": "20"
+      },
+      {
+        "quarter": "2",
+        "churned_accounts": "61"
+      },
+      {
+        "quarter": "3",
+        "churned_accounts": "60"
+      },
+      {
+        "quarter": "4",
+        "churned_accounts": "55"
+      }
+    ]
+  }
+}

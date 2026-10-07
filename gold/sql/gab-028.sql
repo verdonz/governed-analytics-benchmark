@@ -1,0 +1,1 @@
+SELECT DATE_TRUNC('month', started_at) AS month, ROUND(SUM(p.annual_price),2) AS new_arr FROM subscriptions s JOIN plans p ON p.plan_id=s.plan_id WHERE started_at BETWEEN DATE '2025-10-01' AND DATE '2025-12-31' GROUP BY month ORDER BY month

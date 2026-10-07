@@ -1,0 +1,13 @@
+personas:
+  executive: {regions: [all], row_level_accounts: [all], pii: false, sensitive_segments: [aggregate]}
+  finance_analyst: {regions: [all], row_level_accounts: [all], pii: false, sensitive_segments: [all]}
+  sales_manager: {regions: [all], row_level_accounts: [owned], pii: false, sensitive_segments: [aggregate]}
+  regional_manager: {regions: [permitted], row_level_accounts: [aggregate], pii: false, sensitive_segments: [aggregate]}
+  general_employee: {regions: [permitted], row_level_accounts: [none], pii: false, sensitive_segments: [none]}
+protected:
+  regions: [Protected South]
+  account_segments: [enterprise]
+rules:
+  - Never return row-level data from a protected region to regional_manager or general_employee.
+  - Aggregate before returning data when the persona has aggregate-only access.
+  - Never return customer email addresses in benchmark answers.

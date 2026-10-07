@@ -1,0 +1,1 @@
+SELECT p.name, ROUND(SUM(il.amount),2) AS value FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id JOIN products p ON p.product_id=il.product_id WHERE i.status='posted' AND i.recognized_at BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' GROUP BY p.name ORDER BY value DESC LIMIT 1

@@ -1,0 +1,1 @@
+SELECT p.name, ROUND(SUM(r.amount),2) AS refund_amount FROM refunds r JOIN invoices i ON i.invoice_id=r.invoice_id JOIN invoice_lines il ON il.invoice_id=i.invoice_id JOIN products p ON p.product_id=il.product_id WHERE r.refund_date BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' GROUP BY p.name ORDER BY refund_amount DESC LIMIT 1

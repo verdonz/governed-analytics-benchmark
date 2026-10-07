@@ -1,0 +1,1 @@
+SELECT EXTRACT(quarter FROM canceled_at) AS quarter, COUNT(DISTINCT account_id) AS churned_accounts FROM subscriptions WHERE canceled_at BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' AND (reactivated_at IS NULL OR reactivated_at > canceled_at) GROUP BY quarter ORDER BY quarter

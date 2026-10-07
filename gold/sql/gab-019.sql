@@ -1,0 +1,1 @@
+SELECT DISTINCT a.account_id FROM accounts a JOIN support_tickets t ON t.account_id=a.account_id WHERE t.severity IN ('high','critical') AND t.resolved_at IS NULL AND a.test_account=FALSE ORDER BY a.account_id

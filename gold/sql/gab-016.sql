@@ -1,0 +1,1 @@
+SELECT account_id, ROUND(SUM(p.annual_price),2) AS value FROM subscriptions s JOIN plans p ON p.plan_id=s.plan_id WHERE s.started_at BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' GROUP BY account_id HAVING COUNT(*)>1 ORDER BY value DESC

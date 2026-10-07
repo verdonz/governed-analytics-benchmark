@@ -1,0 +1,1 @@
+SELECT r.name, ROUND(100.0*COUNT(DISTINCT CASE WHEN s.status='active' THEN s.account_id END)/NULLIF(COUNT(DISTINCT s.account_id),0),2) AS value FROM subscriptions s JOIN accounts a ON a.account_id=s.account_id JOIN regions r ON r.region_id=a.billing_region_id GROUP BY r.name ORDER BY value DESC LIMIT 1

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+data/benchmark.duckdb
+data/benchmark.duckdb.wal
+results/latest.*
+responses*.jsonl
+prompts-*.jsonl
+data/.dataset-version

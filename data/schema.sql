@@ -1,0 +1,18 @@
+CREATE TABLE regions (region_id INTEGER PRIMARY KEY, name VARCHAR, is_protected BOOLEAN);
+CREATE TABLE plans (plan_id INTEGER PRIMARY KEY, name VARCHAR, monthly_price DOUBLE, annual_price DOUBLE);
+CREATE TABLE products (product_id INTEGER PRIMARY KEY, name VARCHAR, product_type VARCHAR);
+CREATE TABLE accounts (account_id INTEGER PRIMARY KEY, name VARCHAR, billing_region_id INTEGER, segment VARCHAR, test_account BOOLEAN, created_at TIMESTAMP);
+CREATE TABLE customers (customer_id INTEGER PRIMARY KEY, account_id INTEGER, email VARCHAR, created_at TIMESTAMP, is_internal BOOLEAN);
+CREATE TABLE users (user_id INTEGER PRIMARY KEY, account_id INTEGER, role VARCHAR, created_at TIMESTAMP);
+CREATE TABLE subscriptions (subscription_id INTEGER PRIMARY KEY, account_id INTEGER, plan_id INTEGER, started_at TIMESTAMP, canceled_at TIMESTAMP, reactivated_at TIMESTAMP, status VARCHAR);
+CREATE TABLE orders (order_id INTEGER PRIMARY KEY, account_id INTEGER, ordered_at TIMESTAMP, status VARCHAR, channel VARCHAR);
+CREATE TABLE order_items (order_item_id INTEGER PRIMARY KEY, order_id INTEGER, product_id INTEGER, quantity INTEGER, unit_price DOUBLE);
+CREATE TABLE invoices (invoice_id INTEGER PRIMARY KEY, account_id INTEGER, invoice_date DATE, recognized_at DATE, status VARCHAR);
+CREATE TABLE invoice_lines (invoice_line_id INTEGER PRIMARY KEY, invoice_id INTEGER, product_id INTEGER, amount DOUBLE, is_one_time BOOLEAN);
+CREATE TABLE payments (payment_id INTEGER PRIMARY KEY, invoice_id INTEGER, paid_at DATE, amount DOUBLE, status VARCHAR);
+CREATE TABLE refunds (refund_id INTEGER PRIMARY KEY, invoice_id INTEGER, refund_date DATE, amount DOUBLE, reason VARCHAR);
+CREATE TABLE web_sessions (session_id INTEGER PRIMARY KEY, account_id INTEGER, occurred_at TIMESTAMP, region_id INTEGER, is_bot BOOLEAN, is_internal BOOLEAN, converted BOOLEAN);
+CREATE TABLE funnel_events (event_id INTEGER PRIMARY KEY, account_id INTEGER, user_id INTEGER, event_type VARCHAR, occurred_at TIMESTAMP, is_bot BOOLEAN, source VARCHAR);
+CREATE TABLE sales_reps (sales_rep_id INTEGER PRIMARY KEY, name VARCHAR);
+CREATE TABLE account_owners (account_owner_id INTEGER PRIMARY KEY, account_id INTEGER, sales_rep_id INTEGER, valid_from DATE, valid_to DATE);
+CREATE TABLE support_tickets (ticket_id INTEGER PRIMARY KEY, account_id INTEGER, opened_at DATE, severity VARCHAR, resolved_at DATE);

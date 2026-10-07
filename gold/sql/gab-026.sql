@@ -1,0 +1,1 @@
+SELECT source, COUNT(*) FILTER (WHERE event_type='converted') AS conversions, COUNT(*) FILTER (WHERE event_type='trial_started') AS trials FROM funnel_events WHERE occurred_at BETWEEN TIMESTAMP '2025-09-01' AND TIMESTAMP '2025-09-30 23:59:59' AND is_bot=FALSE GROUP BY source ORDER BY trials DESC

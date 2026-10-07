@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS value FROM (SELECT o.account_id FROM orders o JOIN order_items oi ON oi.order_id=o.order_id WHERE o.status='completed' GROUP BY o.account_id HAVING COUNT(DISTINCT oi.product_id)>1) x

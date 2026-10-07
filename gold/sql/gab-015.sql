@@ -1,0 +1,1 @@
+SELECT sr.name, ROUND(SUM(il.amount),2) AS value FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id JOIN account_owners ao ON ao.account_id=i.account_id AND i.invoice_date BETWEEN ao.valid_from AND COALESCE(ao.valid_to, DATE '9999-12-31') JOIN sales_reps sr ON sr.sales_rep_id=ao.sales_rep_id WHERE i.status='posted' GROUP BY sr.name ORDER BY sr.name

@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: Governed Analytics Agent Benchmark
+message: Please cite the Governed Analytics Agent Benchmark when using this resource.
+type: software
+authors:
+  - name: Verdonz
+    website: https://www.verdonz.com
+    affiliation: Verdonz
+version: 26.10.0
+date-released: 2026-10-07
+repository-code: https://github.com/verdonz/governed-analytics-benchmark
+url: https://www.verdonz.com/research/governed-analytics-agent-benchmark
+license: MIT

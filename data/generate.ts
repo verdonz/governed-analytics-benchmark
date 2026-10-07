@@ -1,0 +1,30 @@
+export type Row = Record<string, string | number | boolean | null>;
+const seed = 261007;
+const names = ['Northstar', 'Summit', 'Acme', 'Bluebird', 'Cedar', 'Orbit', 'Pioneer', 'Vertex'];
+const regions = ['North America', 'Europe', 'APAC', 'Latin America', 'Protected South'];
+const products = ['Core Platform', 'Analytics', 'Automation', 'Support'];
+const plans = ['Starter', 'Growth', 'Scale', 'Enterprise'];
+const date = (day: number) => new Date(Date.UTC(2025, 0, 1 + day)).toISOString().slice(0, 10);
+const iso = (day: number) => `${date(day)} 12:00:00`;
+export function generateData() {
+  const out: Record<string, Row[]> = {};
+  out.regions = regions.map((name, i) => ({ region_id: i + 1, name, is_protected: i === 4 }));
+  out.plans = plans.map((name, i) => ({ plan_id: i + 1, name, monthly_price: [49, 199, 799, 2499][i], annual_price: [490, 1990, 7990, 24990][i] }));
+  out.products = products.map((name, i) => ({ product_id: i + 1, name, product_type: i === 0 ? 'recurring' : i === 3 ? 'service' : 'recurring' }));
+  out.sales_reps = Array.from({ length: 20 }, (_, i) => ({ sales_rep_id: i + 1, name: `Rep ${String(i + 1).padStart(2, '0')}` }));
+  out.accounts = Array.from({ length: 3000 }, (_, i) => ({ account_id: i + 1, name: `${names[i % names.length]} ${i + 1}`, billing_region_id: (i % 5) + 1, segment: i % 10 === 0 ? 'enterprise' : i % 3 === 0 ? 'mid-market' : 'smb', test_account: i % 97 === 0, created_at: iso(i % 600) }));
+  out.customers = Array.from({ length: 2000 }, (_, i) => ({ customer_id: i + 1, account_id: (i % 3000) + 1, email: `customer${i + 1}@example.test`, created_at: iso(i % 600), is_internal: i % 211 === 0 }));
+  out.users = Array.from({ length: 5000 }, (_, i) => ({ user_id: i + 1, account_id: (i % 3000) + 1, role: ['admin', 'member', 'viewer'][i % 3], created_at: iso(i % 600) }));
+  out.subscriptions = Array.from({ length: 3000 }, (_, i) => ({ subscription_id: i + 1, account_id: (i % 3000) + 1, plan_id: (i % 4) + 1, started_at: iso(i % 540), canceled_at: i % 9 === 0 ? iso((i % 500) + 60) : null, reactivated_at: i % 18 === 0 ? iso((i % 400) + 180) : null, status: i % 9 === 0 ? 'canceled' : 'active' }));
+  out.orders = Array.from({ length: 20000 }, (_, i) => ({ order_id: i + 1, account_id: (i % 3000) + 1, ordered_at: iso(i % 600), status: i % 17 === 0 ? 'canceled' : 'completed', channel: ['self-serve', 'sales-assisted', 'partner'][i % 3] }));
+  out.order_items = Array.from({ length: 50000 }, (_, i) => ({ order_item_id: i + 1, order_id: (i % 20000) + 1, product_id: (i % 4) + 1, quantity: (i % 3) + 1, unit_price: [100, 250, 600, 1200][i % 4] }));
+  out.invoices = Array.from({ length: 15000 }, (_, i) => ({ invoice_id: i + 1, account_id: (i % 3000) + 1, invoice_date: date(i % 600), recognized_at: date((i + (i % 31)) % 600), status: i % 23 === 0 ? 'void' : 'posted' }));
+  out.invoice_lines = Array.from({ length: 30000 }, (_, i) => ({ invoice_line_id: i + 1, invoice_id: (i % 15000) + 1, product_id: (i % 4) + 1, amount: [490, 1990, 7990, 24990][i % 4] / 12, is_one_time: i % 5 === 0 }));
+  out.payments = Array.from({ length: 14000 }, (_, i) => ({ payment_id: i + 1, invoice_id: (i % 15000) + 1, paid_at: date((i + 3) % 600), amount: [490, 1990, 7990, 24990][i % 4] / 12, status: i % 19 === 0 ? 'failed' : 'settled' }));
+  out.refunds = Array.from({ length: 2400 }, (_, i) => ({ refund_id: i + 1, invoice_id: (i % 15000) + 1, refund_date: date((i + 90) % 600), amount: [25, 75, 150, 300][i % 4], reason: ['duplicate', 'service_issue', 'cancelled'][i % 3] }));
+  out.web_sessions = Array.from({ length: 100000 }, (_, i) => ({ session_id: i + 1, account_id: (i % 3000) + 1, occurred_at: iso(i % 600), region_id: (i % 5) + 1, is_bot: i % 29 === 0, is_internal: i % 211 === 0, converted: i % 7 === 0 }));
+  out.funnel_events = Array.from({ length: 100000 }, (_, i) => ({ event_id: i + 1, account_id: (i % 3000) + 1, user_id: (i % 5000) + 1, event_type: ['visit', 'trial_started', 'demo_requested', 'converted'][i % 4], occurred_at: iso(i % 600), is_bot: i % 29 === 0, source: ['organic', 'paid', 'referral'][i % 3] }));
+  out.account_owners = Array.from({ length: 6000 }, (_, i) => ({ account_owner_id: i + 1, account_id: (i % 3000) + 1, sales_rep_id: (i % 20) + 1, valid_from: `2025-${String((i % 12) + 1).padStart(2, '0')}-01`, valid_to: i % 2 ? '2025-12-31' : null }));
+  out.support_tickets = Array.from({ length: 10000 }, (_, i) => ({ ticket_id: i + 1, account_id: (i % 3000) + 1, opened_at: `2025-${String((i % 12) + 1).padStart(2, '0')}-01`, severity: ['low', 'medium', 'high', 'critical'][i % 4], resolved_at: i % 6 ? `2025-${String(((i + 1) % 12) + 1).padStart(2, '0')}-15` : null }));
+  return { seed, tables: out };
+}

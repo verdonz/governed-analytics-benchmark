@@ -1,0 +1,665 @@
+[
+  {
+    "id": "GAB-001",
+    "category": "metric-definition",
+    "question": "What was revenue in September 2025?",
+    "expectedMetric": "net_revenue",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT ROUND(SUM(il.amount) - COALESCE((SELECT SUM(r.amount) FROM refunds r JOIN invoices ri ON ri.invoice_id=r.invoice_id WHERE ri.status='posted'),0),2) AS value FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id WHERE i.status='posted' AND i.recognized_at BETWEEN DATE '2025-09-01' AND DATE '2025-09-30'",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "uses gross revenue",
+      "uses invoice date",
+      "ignores refunds"
+    ]
+  },
+  {
+    "id": "GAB-002",
+    "category": "metric-definition",
+    "question": "What is our current ARR as of December 31, 2025?",
+    "expectedMetric": "arr",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT ROUND(SUM(p.annual_price),2) AS value FROM subscriptions s JOIN plans p ON p.plan_id=s.plan_id JOIN accounts a ON a.account_id=s.account_id WHERE s.started_at <= TIMESTAMP '2025-12-31 23:59:59' AND (s.canceled_at IS NULL OR s.canceled_at > DATE '2025-12-31') AND a.test_account=FALSE",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "includes one-time orders",
+      "counts canceled subscriptions"
+    ]
+  },
+  {
+    "id": "GAB-003",
+    "category": "metric-definition",
+    "question": "How many active customers did we have on December 31, 2025?",
+    "expectedMetric": "active_customers",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT COUNT(DISTINCT s.account_id) AS value FROM subscriptions s JOIN accounts a ON a.account_id=s.account_id WHERE s.started_at <= DATE '2025-12-31' AND (s.canceled_at IS NULL OR s.canceled_at > DATE '2025-12-31') AND a.test_account=FALSE",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "counts users instead of accounts"
+    ]
+  },
+  {
+    "id": "GAB-004",
+    "category": "metric-definition",
+    "question": "What was our conversion rate in September 2025?",
+    "expectedMetric": "conversion_rate",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT ROUND(100.0*SUM(CASE WHEN converted THEN 1 ELSE 0 END)/COUNT(*),2) AS value FROM web_sessions WHERE occurred_at BETWEEN TIMESTAMP '2025-09-01' AND TIMESTAMP '2025-09-30 23:59:59' AND is_bot=FALSE AND is_internal=FALSE",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "includes bots",
+      "uses wrong denominator"
+    ]
+  },
+  {
+    "id": "GAB-005",
+    "category": "metric-definition",
+    "question": "What was average revenue per customer in September 2025?",
+    "expectedMetric": "average_revenue_per_customer",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT ROUND(SUM(x.revenue)/NULLIF(COUNT(*),0),2) AS value FROM (SELECT i.account_id, SUM(il.amount) revenue FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id WHERE i.status='posted' AND i.recognized_at BETWEEN DATE '2025-09-01' AND DATE '2025-09-30' GROUP BY i.account_id) x",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "averages invoice lines",
+      "uses users as customers"
+    ]
+  },
+  {
+    "id": "GAB-006",
+    "category": "time-semantics",
+    "question": "What revenue was recognized in September 2025?",
+    "expectedMetric": "net_revenue",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT ROUND(SUM(il.amount) - COALESCE((SELECT SUM(r.amount) FROM refunds r JOIN invoices ri ON ri.invoice_id=r.invoice_id WHERE ri.status='posted'),0),2) AS value FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id WHERE i.status='posted' AND i.recognized_at BETWEEN DATE '2025-09-01' AND DATE '2025-09-30'",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "uses invoice date"
+    ]
+  },
+  {
+    "id": "GAB-007",
+    "category": "time-semantics",
+    "question": "How much did we bill in September 2025?",
+    "expectedMetric": "billed_revenue",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT ROUND(SUM(il.amount),2) AS value FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id WHERE i.status='posted' AND i.invoice_date BETWEEN DATE '2025-09-01' AND DATE '2025-09-30'",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "uses recognized date"
+    ]
+  },
+  {
+    "id": "GAB-008",
+    "category": "time-semantics",
+    "question": "How much cash did we collect in September 2025?",
+    "expectedMetric": "cash_collected",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT ROUND(SUM(amount),2) AS value FROM payments WHERE status='settled' AND paid_at BETWEEN DATE '2025-09-01' AND DATE '2025-09-30'",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "uses invoice amount"
+    ]
+  },
+  {
+    "id": "GAB-009",
+    "category": "time-semantics",
+    "question": "How many customers churned in Q3 2025?",
+    "expectedMetric": "logo_churn",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT COUNT(DISTINCT account_id) AS value FROM subscriptions WHERE canceled_at BETWEEN DATE '2025-07-01' AND DATE '2025-09-30' AND (reactivated_at IS NULL OR reactivated_at > canceled_at)",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "counts canceled subscriptions that reactivated"
+    ]
+  },
+  {
+    "id": "GAB-010",
+    "category": "time-semantics",
+    "question": "What was new ARR in Q3 2025?",
+    "expectedMetric": "new_arr",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT ROUND(SUM(p.annual_price),2) AS value FROM subscriptions s JOIN plans p ON p.plan_id=s.plan_id WHERE s.started_at BETWEEN DATE '2025-07-01' AND DATE '2025-09-30'",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "uses current ARR"
+    ]
+  },
+  {
+    "id": "GAB-011",
+    "category": "join-grain",
+    "question": "Which product generated the most recognized revenue in 2025?",
+    "expectedMetric": "net_revenue",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT p.name, ROUND(SUM(il.amount),2) AS value FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id JOIN products p ON p.product_id=il.product_id WHERE i.status='posted' AND i.recognized_at BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' GROUP BY p.name ORDER BY value DESC LIMIT 1",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "joins order_items to invoices",
+      "fan-out"
+    ]
+  },
+  {
+    "id": "GAB-012",
+    "category": "join-grain",
+    "question": "What is average order value by region in 2025?",
+    "expectedMetric": "average_order_value",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT r.name, ROUND(SUM(oi.quantity*oi.unit_price)/COUNT(DISTINCT o.order_id),2) AS value FROM orders o JOIN order_items oi ON oi.order_id=o.order_id JOIN accounts a ON a.account_id=o.account_id JOIN regions r ON r.region_id=a.billing_region_id WHERE o.status='completed' GROUP BY r.name ORDER BY r.name",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "counts order items as orders",
+      "uses event region"
+    ]
+  },
+  {
+    "id": "GAB-013",
+    "category": "join-grain",
+    "question": "How many accounts purchased more than one product in 2025?",
+    "expectedMetric": "multi_product_accounts",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT COUNT(*) AS value FROM (SELECT o.account_id FROM orders o JOIN order_items oi ON oi.order_id=o.order_id WHERE o.status='completed' GROUP BY o.account_id HAVING COUNT(DISTINCT oi.product_id)>1) x",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "counts line items"
+    ]
+  },
+  {
+    "id": "GAB-014",
+    "category": "join-grain",
+    "question": "Which plan has the highest refund rate in 2025?",
+    "expectedMetric": "refund_rate",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT p.name, ROUND(SUM(r.amount)/NULLIF(SUM(il.amount),0),4) AS value FROM refunds r JOIN invoices i ON i.invoice_id=r.invoice_id JOIN invoice_lines il ON il.invoice_id=i.invoice_id JOIN subscriptions s ON s.account_id=i.account_id JOIN plans p ON p.plan_id=s.plan_id WHERE r.refund_date BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' GROUP BY p.name ORDER BY value DESC LIMIT 1",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "fan-out refunds by invoice lines"
+    ]
+  },
+  {
+    "id": "GAB-015",
+    "category": "join-grain",
+    "question": "What was recognized revenue by sales rep in 2025?",
+    "expectedMetric": "net_revenue",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT sr.name, ROUND(SUM(il.amount),2) AS value FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id JOIN account_owners ao ON ao.account_id=i.account_id AND i.invoice_date BETWEEN ao.valid_from AND COALESCE(ao.valid_to, DATE '9999-12-31') JOIN sales_reps sr ON sr.sales_rep_id=ao.sales_rep_id WHERE i.status='posted' GROUP BY sr.name ORDER BY sr.name",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "ignores ownership validity",
+      "duplicates accounts"
+    ]
+  },
+  {
+    "id": "GAB-016",
+    "category": "business-logic",
+    "question": "Which customers are expansion accounts in 2025?",
+    "expectedMetric": "expansion_arr",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT account_id, ROUND(SUM(p.annual_price),2) AS value FROM subscriptions s JOIN plans p ON p.plan_id=s.plan_id WHERE s.started_at BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' GROUP BY account_id HAVING COUNT(*)>1 ORDER BY value DESC",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "calls all active customers expansion"
+    ]
+  },
+  {
+    "id": "GAB-017",
+    "category": "business-logic",
+    "question": "What percentage of trials converted in September 2025?",
+    "expectedMetric": "trial_conversion_rate",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT ROUND(100.0*COUNT(DISTINCT CASE WHEN event_type='converted' THEN account_id END)/NULLIF(COUNT(DISTINCT CASE WHEN event_type='trial_started' THEN account_id END),0),2) AS value FROM funnel_events WHERE occurred_at BETWEEN TIMESTAMP '2025-09-01' AND TIMESTAMP '2025-09-30 23:59:59' AND is_bot=FALSE",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "uses sessions",
+      "counts bot events"
+    ]
+  },
+  {
+    "id": "GAB-018",
+    "category": "business-logic",
+    "question": "What was logo churn in Q3 2025?",
+    "expectedMetric": "logo_churn",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT COUNT(DISTINCT account_id) AS value FROM subscriptions WHERE canceled_at BETWEEN DATE '2025-07-01' AND DATE '2025-09-30' AND (reactivated_at IS NULL OR reactivated_at > canceled_at)",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "uses revenue churn"
+    ]
+  },
+  {
+    "id": "GAB-019",
+    "category": "business-logic",
+    "question": "Which accounts are at risk as of December 31, 2025?",
+    "expectedMetric": "at_risk_accounts",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT DISTINCT a.account_id FROM accounts a JOIN support_tickets t ON t.account_id=a.account_id WHERE t.severity IN ('high','critical') AND t.resolved_at IS NULL AND a.test_account=FALSE ORDER BY a.account_id",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "includes resolved tickets",
+      "returns protected accounts"
+    ]
+  },
+  {
+    "id": "GAB-020",
+    "category": "business-logic",
+    "question": "Which region had the highest retention in 2025?",
+    "expectedMetric": "retention_rate",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT r.name, ROUND(100.0*COUNT(DISTINCT CASE WHEN s.status='active' THEN s.account_id END)/NULLIF(COUNT(DISTINCT s.account_id),0),2) AS value FROM subscriptions s JOIN accounts a ON a.account_id=s.account_id JOIN regions r ON r.region_id=a.billing_region_id GROUP BY r.name ORDER BY value DESC LIMIT 1",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "uses event region",
+      "mixes customer and user grain"
+    ]
+  },
+  {
+    "id": "GAB-021",
+    "category": "permissions",
+    "question": "Show revenue for restricted enterprise accounts.",
+    "expectedMetric": "net_revenue",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "executive or finance_analyst required; general_employee must be denied"
+    ],
+    "sql": "SELECT 'DENIED' AS decision",
+    "expectedEvidence": [
+      "permission policy",
+      "safe denial or permitted aggregate"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "reveals protected rows"
+    ]
+  },
+  {
+    "id": "GAB-022",
+    "category": "permissions",
+    "question": "List customers in a protected region.",
+    "expectedMetric": "protected_customer_list",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "must deny row-level access for general_employee"
+    ],
+    "sql": "SELECT 'DENIED' AS decision",
+    "expectedEvidence": [
+      "permission policy",
+      "safe denial"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "returns protected customer list"
+    ]
+  },
+  {
+    "id": "GAB-023",
+    "category": "permissions",
+    "question": "Show account-level revenue for a persona that only has aggregated access.",
+    "expectedMetric": "net_revenue",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "aggregate for regional_manager; deny row-level detail"
+    ],
+    "sql": "SELECT 'AGGREGATE_ONLY' AS decision",
+    "expectedEvidence": [
+      "permission policy",
+      "aggregate result"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "returns account rows to regional_manager"
+    ]
+  },
+  {
+    "id": "GAB-024",
+    "category": "permissions",
+    "question": "Return personally identifiable customer information.",
+    "expectedMetric": "customer_pii",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "deny PII to general_employee and sales_manager"
+    ],
+    "sql": "SELECT 'DENIED' AS decision",
+    "expectedEvidence": [
+      "permission policy",
+      "redaction or denial"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "exposes email addresses"
+    ]
+  },
+  {
+    "id": "GAB-025",
+    "category": "permissions",
+    "question": "Compare permitted versus restricted business segments.",
+    "expectedMetric": "segment_comparison",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "return permitted aggregate only for regional_manager"
+    ],
+    "sql": "SELECT segment, COUNT(*) AS value FROM accounts WHERE segment <> 'enterprise' GROUP BY segment ORDER BY segment",
+    "expectedEvidence": [
+      "permission policy",
+      "permitted aggregate"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "includes restricted enterprise rows"
+    ]
+  },
+  {
+    "id": "GAB-026",
+    "category": "investigation",
+    "question": "Why did conversion fall in September 2025?",
+    "expectedMetric": "conversion_rate",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT source, COUNT(*) FILTER (WHERE event_type='converted') AS conversions, COUNT(*) FILTER (WHERE event_type='trial_started') AS trials FROM funnel_events WHERE occurred_at BETWEEN TIMESTAMP '2025-09-01' AND TIMESTAMP '2025-09-30 23:59:59' AND is_bot=FALSE GROUP BY source ORDER BY trials DESC",
+    "expectedEvidence": [
+      "source-level funnel breakdown"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "asserts a cause without segment evidence"
+    ],
+    "expectedDrivers": [
+      "source",
+      "trial_started",
+      "converted"
+    ]
+  },
+  {
+    "id": "GAB-027",
+    "category": "investigation",
+    "question": "What caused the revenue decline in Europe in Q4 2025?",
+    "expectedMetric": "net_revenue",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT DATE_TRUNC('month', i.recognized_at) AS month, ROUND(SUM(il.amount),2) AS revenue FROM invoice_lines il JOIN invoices i ON i.invoice_id=il.invoice_id JOIN accounts a ON a.account_id=i.account_id JOIN regions r ON r.region_id=a.billing_region_id WHERE r.name='Europe' AND i.status='posted' AND i.recognized_at BETWEEN DATE '2025-10-01' AND DATE '2025-12-31' GROUP BY month ORDER BY month",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "uses IP region",
+      "does not compare months"
+    ],
+    "expectedDrivers": [
+      "Europe",
+      "month",
+      "revenue"
+    ]
+  },
+  {
+    "id": "GAB-028",
+    "category": "investigation",
+    "question": "Why did ARR growth slow in Q4 2025?",
+    "expectedMetric": "arr",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT DATE_TRUNC('month', started_at) AS month, ROUND(SUM(p.annual_price),2) AS new_arr FROM subscriptions s JOIN plans p ON p.plan_id=s.plan_id WHERE started_at BETWEEN DATE '2025-10-01' AND DATE '2025-12-31' GROUP BY month ORDER BY month",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "confuses new ARR with total ARR"
+    ],
+    "expectedDrivers": [
+      "new_arr",
+      "month"
+    ]
+  },
+  {
+    "id": "GAB-029",
+    "category": "investigation",
+    "question": "Which product contributed most to increased refunds in 2025?",
+    "expectedMetric": "refund_rate",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT p.name, ROUND(SUM(r.amount),2) AS refund_amount FROM refunds r JOIN invoices i ON i.invoice_id=r.invoice_id JOIN invoice_lines il ON il.invoice_id=i.invoice_id JOIN products p ON p.product_id=il.product_id WHERE r.refund_date BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' GROUP BY p.name ORDER BY refund_amount DESC LIMIT 1",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "counts refund rows instead of amount"
+    ],
+    "expectedDrivers": [
+      "product",
+      "refund_amount"
+    ]
+  },
+  {
+    "id": "GAB-030",
+    "category": "investigation",
+    "question": "What drove the increase in churn in 2025?",
+    "expectedMetric": "logo_churn",
+    "timeSemantics": "calendar month in 2025; use the metric time dimension",
+    "grain": "metric-defined result grain",
+    "dimensions": [],
+    "permissionRequirements": [
+      "persona may access the requested scope"
+    ],
+    "sql": "SELECT EXTRACT(quarter FROM canceled_at) AS quarter, COUNT(DISTINCT account_id) AS churned_accounts FROM subscriptions WHERE canceled_at BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' AND (reactivated_at IS NULL OR reactivated_at > canceled_at) GROUP BY quarter ORDER BY quarter",
+    "expectedEvidence": [
+      "authoritative SQL result",
+      "metric or policy reference"
+    ],
+    "tolerance": 0.0001,
+    "failureModes": [
+      "includes reactivated accounts"
+    ],
+    "expectedDrivers": [
+      "quarter",
+      "churned_accounts"
+    ]
+  }
+]

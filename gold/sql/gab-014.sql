@@ -1,0 +1,1 @@
+SELECT p.name, ROUND(SUM(r.amount)/NULLIF(SUM(il.amount),0),4) AS value FROM refunds r JOIN invoices i ON i.invoice_id=r.invoice_id JOIN invoice_lines il ON il.invoice_id=i.invoice_id JOIN subscriptions s ON s.account_id=i.account_id JOIN plans p ON p.plan_id=s.plan_id WHERE r.refund_date BETWEEN DATE '2025-01-01' AND DATE '2025-12-31' GROUP BY p.name ORDER BY value DESC LIMIT 1

@@ -1,0 +1,1 @@
+SELECT ROUND(100.0*COUNT(DISTINCT CASE WHEN event_type='converted' THEN account_id END)/NULLIF(COUNT(DISTINCT CASE WHEN event_type='trial_started' THEN account_id END),0),2) AS value FROM funnel_events WHERE occurred_at BETWEEN TIMESTAMP '2025-09-01' AND TIMESTAMP '2025-09-30 23:59:59' AND is_bot=FALSE
